@@ -4,7 +4,6 @@ import { toast } from 'react-toastify'
 import axios from 'axios'
 import userService from '../services/user.service'
 import { setTokens } from '../services/localStorage.service'
-// import { random } from 'lodash'
 
 const httpAuth = axios.create({
     baseURL: 'https://identitytoolkit.googleapis.com/v1/',
@@ -86,7 +85,8 @@ const AuthProvider = ({ children }) => {
     }
     async function createUser(data) {
         try {
-            const { content } = userService.create(data)
+            const { content } = await userService.create(data)
+            console.log('content', content)
             setUser(content)
         } catch (error) {
             errorCatcher(error)

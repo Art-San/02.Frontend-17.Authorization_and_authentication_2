@@ -5,7 +5,6 @@ import configFile from '../config.json'
 const http = axios.create({
     baseURL: configFile.apiEndpoint
 })
-console.log('http', http)
 http.interceptors.request.use(
     function (config) {
         if (configFile.isFireBase) {
@@ -20,11 +19,11 @@ http.interceptors.request.use(
     }
 )
 function transformData(data) {
-    return data
+    return data && !data._id
         ? Object.keys(data).map((key) => ({
             ...data[key]
         }))
-        : []
+        : data
 }
 http.interceptors.response.use(
     (res) => {
