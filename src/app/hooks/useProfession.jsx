@@ -12,7 +12,6 @@ export const useProfessions = () => {
 export const ProfessionProvider = ({ children }) => {
     const [isLoading, setLoading] = useState(true)
     const [professions, setProfessions] = useState([])
-    console.log('professions', professions, 'isLoading', isLoading)
     const [error, setError] = useState(null)
     useEffect(() => {
         if (error !== null) {
