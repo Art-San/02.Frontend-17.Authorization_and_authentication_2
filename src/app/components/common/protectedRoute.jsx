@@ -1,14 +1,13 @@
 import React from 'react'
-import { Redirect, Route } from 'react-router-dom'
-import { useAuth } from '../../hooks/useAuth'
+import { Route, Redirect } from 'react-router-dom'
 import PropTypes from 'prop-types'
-
-const ProtectedRoute = ({ component: Component, children, ...rest }) => {
+import { useAuth } from '../../hooks/useAuth'
+function ProtectedRoute({ component: Component, children, ...rest }) {
     const { currentUser } = useAuth()
     return (
         <Route
             {...rest}
-            render = {(props) => {
+            render={(props) => {
                 if (!currentUser) {
                     return (
                         <Redirect
@@ -21,7 +20,7 @@ const ProtectedRoute = ({ component: Component, children, ...rest }) => {
                         />
                     )
                 }
-                return Component ? <Component {...props}/> : children
+                return Component ? <Component {...props} /> : children
             }}
         />
     )

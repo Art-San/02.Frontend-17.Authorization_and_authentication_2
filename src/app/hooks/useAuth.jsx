@@ -3,7 +3,9 @@ import PropTypes from 'prop-types'
 import { toast } from 'react-toastify'
 import axios from 'axios'
 import userService from '../services/user.service'
-import localStorageService, { setTokens } from '../services/localStorage.service'
+import localStorageService, {
+    setTokens
+} from '../services/localStorage.service'
 import { useHistory } from 'react-router-dom'
 
 export const httpAuth = axios.create({
@@ -19,10 +21,10 @@ export const useAuth = () => {
 }
 
 const AuthProvider = ({ children }) => {
-    const history = useHistory()
     const [currentUser, setUser] = useState()
     const [error, setError] = useState(null)
     const [isLoading, setLoading] = useState(true)
+    const history = useHistory()
 
     async function logIn({ email, password }) {
         try {
@@ -44,6 +46,7 @@ const AuthProvider = ({ children }) => {
                 switch (message) {
                 case 'INVALID_PASSWORD':
                     throw new Error('Email или пароль введены некорректно')
+
                 default:
                     throw new Error(
                         'Слишком много попыток входа. Попробуйте позже'
@@ -58,7 +61,16 @@ const AuthProvider = ({ children }) => {
         history.push('/')
     }
     function randomInt(min, max) {
-        return Math.floor(Math.random() * (max - min) + min)
+        return Math.floor(Math.random() * (max - min + 1) + min)
+    }
+
+    async function updateUserData(data) {
+        try {
+            const { content } = await userService.update(data)
+            setUser(content)
+        } catch (error) {
+            errorCatcher(error)
+        }
     }
 
     async function signUp({ email, password, ...rest }) {
@@ -93,13 +105,12 @@ const AuthProvider = ({ children }) => {
                     throw errorObject
                 }
             }
-            // throw new Error
         }
     }
     async function createUser(data) {
         try {
             const { content } = await userService.create(data)
-            console.log('content', content)
+            console.log(content)
             setUser(content)
         } catch (error) {
             errorCatcher(error)
@@ -111,7 +122,7 @@ const AuthProvider = ({ children }) => {
     }
     async function getUserData() {
         try {
-            const { content } = await userService.getCurretUser()
+            const { content } = await userService.getCurrentUser()
             setUser(content)
         } catch (error) {
             errorCatcher(error)
@@ -133,7 +144,7 @@ const AuthProvider = ({ children }) => {
         }
     }, [error])
     return (
-        <AuthContext.Provider value={{ signUp, logIn, currentUser, logOut }}>
+        <AuthContext.Provider value={{ signUp, logIn, currentUser, logOut, updateUserData }}>
             {!isLoading ? children : 'Loading...'}
         </AuthContext.Provider>
     )

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { paginate } from '../../../utils/paginate'
 import Pagination from '../../common/pagination'
@@ -19,8 +19,6 @@ const UsersListPage = () => {
     const [sortBy, setSortBy] = useState({ path: 'name', order: 'asc' })
     const pageSize = 8
 
-    // console.log('professions', professions, 'isLoading', isLoading)
-
     const handleDelete = (userId) => {
         // setUsers(users.filter((user) => user._id !== userId));
         console.log(userId)
@@ -33,7 +31,7 @@ const UsersListPage = () => {
             return user
         })
         // setUsers(newArray);
-        console.log('newArray', newArray)
+        console.log(newArray)
     }
 
     useEffect(() => {
@@ -69,7 +67,7 @@ const UsersListPage = () => {
                     ? data.filter(
                         (user) =>
                             JSON.stringify(user.profession) ===
-                                JSON.stringify(selectedProf)
+                        JSON.stringify(selectedProf)
                     )
                     : data
             return filteredUsers.filter((u) => u._id !== currentUser._id)

@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
+import { toast } from 'react-toastify'
 import { useParams } from 'react-router-dom'
 import { useAuth } from './useAuth'
 import { nanoid } from 'nanoid'
 import commentService from '../services/comment.service'
-import { toast } from 'react-toastify'
 
 const CommentsContext = React.createContext()
 
@@ -32,13 +32,11 @@ export const CommentsProvider = ({ children }) => {
         try {
             const { content } = await commentService.createComment(comment)
             setComments((prevState) => [...prevState, content])
-            console.log('content', content)
         } catch (error) {
             errorCatcher(error)
         }
-        console.log('comment', comment)
+        console.log(comment)
     }
-
     async function getComments() {
         try {
             const { content } = await commentService.getComments(userId)
@@ -49,7 +47,6 @@ export const CommentsProvider = ({ children }) => {
             setLoading(false)
         }
     }
-
     function errorCatcher(error) {
         const { message } = error.response.data
         setError(message)
@@ -66,7 +63,6 @@ export const CommentsProvider = ({ children }) => {
             errorCatcher(error)
         }
     }
-
     useEffect(() => {
         if (error !== null) {
             toast(error)

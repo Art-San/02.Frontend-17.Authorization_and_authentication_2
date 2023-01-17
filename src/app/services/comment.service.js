@@ -2,10 +2,10 @@ import httpService from './http.service'
 const commentEndpoint = 'comment/'
 
 const commentService = {
-    createComment: async (payLoad) => {
+    createComment: async (payload) => {
         const { data } = await httpService.put(
-            commentEndpoint + payLoad._id,
-            payLoad
+            commentEndpoint + payload._id,
+            payload
         )
         return data
     },

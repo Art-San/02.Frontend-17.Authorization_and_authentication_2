@@ -12,7 +12,6 @@ const LoginForm = () => {
         stayOn: false
     })
     const history = useHistory()
-    // console.log('history', history.location.state.form)
     const { logIn } = useAuth()
     const [errors, setErrors] = useState({})
     const [enterError, setEnterError] = useState(null)
@@ -53,8 +52,7 @@ const LoginForm = () => {
 
         try {
             await logIn(data)
-            // console.log('history', history.location.state.from.pathname)
-            // history.push('/users')
+
             history.push(
                 history.location.state
                     ? history.location.state.from.pathname

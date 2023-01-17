@@ -25,7 +25,7 @@ function App() {
                                 component={Users}
                             />
                             <Route path="/login/:type?" component={Login} />
-                            <Route path='/logout' component={LogOut} />
+                            <Route path="/logout" component={LogOut} />
                             <Route path="/" exact component={Main} />
                             <Redirect to="/" />
                         </Switch>
