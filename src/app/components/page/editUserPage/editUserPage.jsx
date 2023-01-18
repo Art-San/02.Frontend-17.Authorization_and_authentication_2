@@ -26,28 +26,7 @@ const EditUserPage = () => {
         label: p.name,
         value: p._id
     }))
-    // const getProfessionById = (id) => {
-    //     for (const prof of professions) {
-    //         if (prof.value === id) {
-    //             return { _id: prof.value, name: prof.label }
-    //         }
-    //     }
-    // }
-    // const getQualities = (elements) => {
-    //     const qualitiesArray = []
-    //     for (const elem of elements) {
-    //         for (const quality in qualities) {
-    //             if (elem.value === qualities[quality].value) {
-    //                 qualitiesArray.push({
-    //                     _id: qualities[quality].value,
-    //                     name: qualities[quality].label,
-    //                     color: qualities[quality].color
-    //                 })
-    //             }
-    //         }
-    //     }
-    //     return qualitiesArray
-    // }
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         const isValid = validate()
@@ -67,14 +46,15 @@ const EditUserPage = () => {
         }
         return qualitiesArray
     }
+
     const transformData = (data) => {
-        console.log('data', data)
         const result = getQualitiesListByIds(data).map((qual) => ({
             label: qual.name,
             value: qual._id
         }))
         return result
     }
+
     useEffect(() => {
         if (!professionLoading && !qualitiesLoading && currentUser && !data) {
             setData({
