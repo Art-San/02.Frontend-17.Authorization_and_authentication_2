@@ -8,6 +8,33 @@ import NavBar from './components/ui/navBar'
 import { ProfessionProvider } from './hooks/useProfession'
 import { QualitiesProvider } from './hooks/useQualities'
 import AuthProvider from './hooks/useAuth'
+// в данном уроке создали правила в базе FAIRBASE чтения и записи пользоватилями
+// получили ошибку что не аторизованны
+// {
+//     "rules": {
+//       "user": {
+//         ".read": "auth  !=null",
+//         "$uid": {
+//             ".write": "$uid === auth.uid"
+//         }
+//       },
+//       "quality": {
+//         ".read": true,
+//         ".write": false
+//       },
+//       "profession": {
+//         ".read": true,
+//         ".write": false
+//       },
+//       "comment": {
+//         ".read": "auth  !=null",
+//             ".indexOn": ["pageId"],
+//               "$cid": {
+//                  ".write":"auth !=null&& ((data.child('userId').val() === auth.uid) || ( newData.child('userId').val() === auth.uid))"
+//                 }
+//       }
+//     }
+//   }
 
 function App() {
     return (
