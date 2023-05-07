@@ -27,7 +27,8 @@ const NavBar = () => {
                 </ul>
                 <div className="d-flex">
                     {currentUser ? (
-                        <NavProfile/>
+                        <NavProfile // Добавляем пользователя в Navbar
+                        />
                     ) : (
                         <Link
                             className="nav-link "
