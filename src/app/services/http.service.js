@@ -25,9 +25,9 @@ http.interceptors.request.use(
                     idToken: data.id_token,
                     expiresIn: data.expires_in,
                     localId: data.user_id
-
                 })
             }
+            // Авторизированный запрос
             const accessToken = localStorageService.getAccessToken()
             if (accessToken) {
                 config.params = { ...config.params, auth: accessToken }
@@ -42,8 +42,8 @@ http.interceptors.request.use(
 function transformData(data) {
     return data && !data._id
         ? Object.keys(data).map((key) => ({
-            ...data[key]
-        }))
+              ...data[key]
+          }))
         : data
 }
 http.interceptors.response.use(
