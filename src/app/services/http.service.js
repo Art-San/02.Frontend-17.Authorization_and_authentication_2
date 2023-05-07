@@ -19,11 +19,11 @@ http.interceptors.request.use(
     }
 )
 function transformData(data) {
-    return data && !data._id
+    return data && !data._id // добавили условие !data._id // Получение и хранение User data
         ? Object.keys(data).map((key) => ({
-            ...data[key]
-        }))
-        : data
+              ...data[key]
+          }))
+        : data // здесь было [] заменили на дату
 }
 http.interceptors.response.use(
     (res) => {
