@@ -15,6 +15,7 @@ const userService = {
         )
         return data
     },
+    // Получение User data при загрузке
     getCurretUser: async () => {
         const { data } = await httpService.get(
             userEndpoint + localStorageService.getUserId()

@@ -3,7 +3,9 @@ import PropTypes from 'prop-types'
 import { toast } from 'react-toastify'
 import axios from 'axios'
 import userService from '../services/user.service'
-import localStorageService, { setTokens } from '../services/localStorage.service'
+import localStorageService, {
+    setTokens
+} from '../services/localStorage.service'
 
 const httpAuth = axios.create({
     baseURL: 'https://identitytoolkit.googleapis.com/v1/',
@@ -32,19 +34,19 @@ const AuthProvider = ({ children }) => {
                 }
             )
             setTokens(data)
-            getUserData()
+            getUserData() // Получение User data при загрузке
         } catch (error) {
             errorCatcher(error)
             const { code, message } = error.response.data.error
             console.log(code, message)
             if (code === 400) {
                 switch (message) {
-                case 'INVALID_PASSWORD':
-                    throw new Error('Email или пароль введены некорректно')
-                default:
-                    throw new Error(
-                        'Слишком много попыток входа. Попробуйте позже'
-                    )
+                    case 'INVALID_PASSWORD':
+                        throw new Error('Email или пароль введены некорректно')
+                    default:
+                        throw new Error(
+                            'Слишком много попыток входа. Попробуйте позже'
+                        )
                 }
             }
         }
@@ -97,6 +99,7 @@ const AuthProvider = ({ children }) => {
         const { message } = error.response.data
         setError(message)
     }
+    // Получение User data при загрузке
     async function getUserData() {
         try {
             const { content } = await userService.getCurretUser()
@@ -105,6 +108,7 @@ const AuthProvider = ({ children }) => {
             errorCatcher(error)
         }
     }
+    // олучение User data при загрузке
     useEffect(() => {
         if (localStorageService.getAccessToken()) {
             getUserData()
