@@ -17,7 +17,7 @@ const RegisterForm = () => {
         password: '',
         profession: '',
         sex: 'male',
-        name: '',
+        name: '', // Имя в форме регистрации
         qualities: [],
         licence: false
     })
@@ -50,6 +50,7 @@ const RegisterForm = () => {
             }
         },
         name: {
+            // Имя в форме регистрации
             isRequired: {
                 message: 'Имя обязательно для заполнения'
             },
@@ -121,7 +122,7 @@ const RegisterForm = () => {
                 onChange={handleChange}
                 error={errors.email}
             />
-            <TextField
+            <TextField // Имя в форме регистрации
                 label="Имя"
                 name="name"
                 value={data.name}
