@@ -39,18 +39,19 @@ const AuthProvider = ({ children }) => {
             console.log(code, message)
             if (code === 400) {
                 switch (message) {
-                case 'INVALID_PASSWORD':
-                    throw new Error('Email или пароль введены некорректно')
-                default:
-                    throw new Error(
-                        'Слишком много попыток входа. Попробуйте позже'
-                    )
+                    case 'INVALID_PASSWORD':
+                        throw new Error('Email или пароль введены некорректно')
+                    default:
+                        throw new Error(
+                            'Слишком много попыток входа. Попробуйте позже'
+                        )
                 }
             }
         }
     }
 
     function randomInt(min, max) {
+        // Изменяем SignUp-метод
         return Math.floor(Math.random() * (max - min) + min)
     }
 
@@ -65,7 +66,7 @@ const AuthProvider = ({ children }) => {
             await createUser({
                 _id: data.localId,
                 email,
-                rate: randomInt(1, 5),
+                rate: randomInt(1, 5), // Изменяем SignUp-метод
                 completedMeetings: randomInt(0, 200),
                 ...rest
             })
