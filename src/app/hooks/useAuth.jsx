@@ -3,7 +3,9 @@ import PropTypes from 'prop-types'
 import { toast } from 'react-toastify'
 import axios from 'axios'
 import userService from '../services/user.service'
-import localStorageService, { setTokens } from '../services/localStorage.service'
+import localStorageService, {
+    setTokens
+} from '../services/localStorage.service'
 
 export const httpAuth = axios.create({
     baseURL: 'https://identitytoolkit.googleapis.com/v1/',
@@ -18,7 +20,7 @@ export const useAuth = () => {
 }
 
 const AuthProvider = ({ children }) => {
-    const [currentUser, setUser] = useState()
+    const [currentUser, setUser] = useState() // было useState({})
     const [error, setError] = useState(null)
 
     async function logIn({ email, password }) {
@@ -39,12 +41,12 @@ const AuthProvider = ({ children }) => {
             console.log(code, message)
             if (code === 400) {
                 switch (message) {
-                case 'INVALID_PASSWORD':
-                    throw new Error('Email или пароль введены некорректно')
-                default:
-                    throw new Error(
-                        'Слишком много попыток входа. Попробуйте позже'
-                    )
+                    case 'INVALID_PASSWORD':
+                        throw new Error('Email или пароль введены некорректно')
+                    default:
+                        throw new Error(
+                            'Слишком много попыток входа. Попробуйте позже'
+                        )
                 }
             }
         }
