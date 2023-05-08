@@ -21,6 +21,7 @@ export function getAccessToken() {
 export function getRefreshToken() {
     return localStorage.getItem(REFRESH_KEY)
 }
+// LogOut
 export function removeAuthData(params) {
     localStorage.removeItem(USERID_KEY)
     localStorage.removeItem(TOKEN_KEY)

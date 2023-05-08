@@ -3,7 +3,9 @@ import PropTypes from 'prop-types'
 import { toast } from 'react-toastify'
 import axios from 'axios'
 import userService from '../services/user.service'
-import localStorageService, { setTokens } from '../services/localStorage.service'
+import localStorageService, {
+    setTokens
+} from '../services/localStorage.service'
 import { useHistory } from 'react-router-dom'
 
 export const httpAuth = axios.create({
@@ -42,20 +44,21 @@ const AuthProvider = ({ children }) => {
             console.log(code, message)
             if (code === 400) {
                 switch (message) {
-                case 'INVALID_PASSWORD':
-                    throw new Error('Email или пароль введены некорректно')
-                default:
-                    throw new Error(
-                        'Слишком много попыток входа. Попробуйте позже'
-                    )
+                    case 'INVALID_PASSWORD':
+                        throw new Error('Email или пароль введены некорректно')
+                    default:
+                        throw new Error(
+                            'Слишком много попыток входа. Попробуйте позже'
+                        )
                 }
             }
         }
     }
     function logOut() {
-        localStorageService.removeAuthData()
-        setUser(null)
-        history.push('/')
+        // LogOut
+        localStorageService.removeAuthData() // удаляет из локального хранилища браузера данные пользователя, необходимые для авторизации.
+        setUser(null) // устанавливает значение переменной `user` в `null`. Переменная `user` хранит информацию о текущем авторизованном пользователе в системе.
+        history.push('/') // перенаправляет пользователя на главную страницу приложения.
     }
     function randomInt(min, max) {
         return Math.floor(Math.random() * (max - min) + min)
