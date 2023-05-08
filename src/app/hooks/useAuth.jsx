@@ -3,7 +3,9 @@ import PropTypes from 'prop-types'
 import { toast } from 'react-toastify'
 import axios from 'axios'
 import userService from '../services/user.service'
-import localStorageService, { setTokens } from '../services/localStorage.service'
+import localStorageService, {
+    setTokens
+} from '../services/localStorage.service'
 import { useHistory } from 'react-router-dom'
 
 export const httpAuth = axios.create({
@@ -42,12 +44,12 @@ const AuthProvider = ({ children }) => {
             console.log(code, message)
             if (code === 400) {
                 switch (message) {
-                case 'INVALID_PASSWORD':
-                    throw new Error('Email или пароль введены некорректно')
-                default:
-                    throw new Error(
-                        'Слишком много попыток входа. Попробуйте позже'
-                    )
+                    case 'INVALID_PASSWORD':
+                        throw new Error('Email или пароль введены некорректно')
+                    default:
+                        throw new Error(
+                            'Слишком много попыток входа. Попробуйте позже'
+                        )
                 }
             }
         }
@@ -74,9 +76,8 @@ const AuthProvider = ({ children }) => {
                 email,
                 rate: randomInt(1, 5),
                 completedMeetings: randomInt(0, 200),
-                image: `https://avatars.dicebear.com/api/avataaars/${(
-                    Math.random() + 1
-                )
+                image: `https://avatars.dicebear.com/api/avataaars/${// Добавление изображения пользователя
+                (Math.random() + 1)
                     .toString(36)
                     .substring(7)}.svg`,
                 ...rest
