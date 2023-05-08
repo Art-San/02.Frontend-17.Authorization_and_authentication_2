@@ -54,8 +54,9 @@ const LoginForm = () => {
         try {
             await logIn(data)
             // console.log('history', history.location.state.from.pathname)
-            // history.push('/users')
+            // history.push('/users') было так
             history.push(
+                // Переадресация после входа на у страницу на которой был ранее исли есть в истории "history.location.state.from.pathname"
                 history.location.state
                     ? history.location.state.from.pathname
                     : '/'

@@ -8,11 +8,12 @@ const ProtectedRoute = ({ component: Component, children, ...rest }) => {
     return (
         <Route
             {...rest}
-            render = {(props) => {
+            render={(props) => {
                 if (!currentUser) {
                     return (
                         <Redirect
                             to={{
+                                // Переадресация после входа на у страницу на которой был ранее исли есть в истории "history.location.state.from.pathname"
                                 pathname: '/login',
                                 state: {
                                     from: props.location
@@ -21,14 +22,14 @@ const ProtectedRoute = ({ component: Component, children, ...rest }) => {
                         />
                     )
                 }
-                return Component ? <Component {...props}/> : children
+                return Component ? <Component {...props} /> : children
             }}
         />
     )
 }
 ProtectedRoute.propTypes = {
     component: PropTypes.func,
-    location: PropTypes.object,
+    location: PropTypes.object, // Переадресация после входа на у страницу на которой был ранее исли есть в истории
     children: PropTypes.oneOfType([
         PropTypes.arrayOf(PropTypes.node),
         PropTypes.node

@@ -3,7 +3,9 @@ import PropTypes from 'prop-types'
 import { toast } from 'react-toastify'
 import axios from 'axios'
 import userService from '../services/user.service'
-import localStorageService, { setTokens } from '../services/localStorage.service'
+import localStorageService, {
+    setTokens
+} from '../services/localStorage.service'
 
 export const httpAuth = axios.create({
     baseURL: 'https://identitytoolkit.googleapis.com/v1/',
@@ -33,19 +35,19 @@ const AuthProvider = ({ children }) => {
                 }
             )
             setTokens(data)
-            await getUserData()
+            await getUserData() // необходим "await" Переадресация после входа на у страницу на которой был ранее исли есть в истории "history.location.state.from.pathname"
         } catch (error) {
             errorCatcher(error)
             const { code, message } = error.response.data.error
             console.log(code, message)
             if (code === 400) {
                 switch (message) {
-                case 'INVALID_PASSWORD':
-                    throw new Error('Email или пароль введены некорректно')
-                default:
-                    throw new Error(
-                        'Слишком много попыток входа. Попробуйте позже'
-                    )
+                    case 'INVALID_PASSWORD':
+                        throw new Error('Email или пароль введены некорректно')
+                    default:
+                        throw new Error(
+                            'Слишком много попыток входа. Попробуйте позже'
+                        )
                 }
             }
         }
