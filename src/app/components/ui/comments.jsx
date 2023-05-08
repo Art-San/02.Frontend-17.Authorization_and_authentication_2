@@ -13,7 +13,7 @@ const Comments = () => {
         //     .then((data) => setComments([...comments, data]))
     }
     const handleRemoveComment = (id) => {
-        removeComment(id)
+        removeComment(id) // Удаление комментариев
         // api.comments.remove(id).then((id) => {
         //     setComments(comments.filter((x) => x._id !== id))
         // })
