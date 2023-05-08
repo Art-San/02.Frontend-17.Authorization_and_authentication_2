@@ -36,6 +36,7 @@ const UserProvider = ({ children }) => {
         setError(message)
         setLoading(false)
     }
+    // Изменяем UserPage
     function getUserById(userId) {
         return users.find((u) => u._id === userId)
     }

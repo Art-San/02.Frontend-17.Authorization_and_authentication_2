@@ -5,9 +5,9 @@ import QualitiesCard from '../../ui/qualitiesCard'
 import MeetingsCard from '../../ui/meetingsCard'
 import Comments from '../../ui/comments'
 import { useUser } from '../../../hooks/useUsers'
-
+// Изменяем UserPage
 const UserPage = ({ userId }) => {
-    const { getUserById } = useUser()
+    const { getUserById } = useUser() // ранее юзера получали из фэйк АПИ
     const user = getUserById(userId)
     if (user) {
         return (

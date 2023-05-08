@@ -17,7 +17,7 @@ const UserCard = ({ user }) => {
                 </button>
                 <div className="d-flex flex-column align-items-center text-center position-relative">
                     <img
-                        src={user.image}
+                        src={user.image} // Изменяем UserPage
                         className="rounded-circle"
                         width="150"
                     />
