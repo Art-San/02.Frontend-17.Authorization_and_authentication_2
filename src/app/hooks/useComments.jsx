@@ -20,7 +20,7 @@ export const CommentsProvider = ({ children }) => {
     const [error, setError] = useState(null)
     useEffect(() => {
         getComments()
-    }, [userId])
+    }, [userId]) // Отображение комментариев небыло userId и не отображались коментарии
     async function createComment(data) {
         const comment = {
             ...data,
@@ -31,8 +31,8 @@ export const CommentsProvider = ({ children }) => {
         }
         try {
             const { content } = await commentService.createComment(comment)
-            setComments((prevState) => [...prevState, content])
-            console.log('content', content)
+            setComments((prevState) => [...prevState, content]) // Отображение комментариев
+            // console.log('content', content)
         } catch (error) {
             errorCatcher(error)
         }

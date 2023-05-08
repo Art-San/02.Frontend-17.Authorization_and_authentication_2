@@ -9,7 +9,7 @@ const Comment = ({
     userId,
     onRemove
 }) => {
-    const { getUserById } = useUser()
+    const { getUserById } = useUser() // Отображение комментариев
     const user = getUserById(userId)
 
     return (
@@ -18,7 +18,7 @@ const Comment = ({
                 <div className="col">
                     <div className="d-flex flex-start ">
                         <img
-                            src={user.image}
+                            src={user.image} // Отображение комментариев
                             className="rounded-circle shadow-1-strong me-3"
                             alt="avatar"
                             width="65"
