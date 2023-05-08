@@ -11,15 +11,13 @@ import { useProfessions } from '../../../hooks/useProfession'
 import { useAuth } from '../../../hooks/useAuth'
 const UsersListPage = () => {
     const { users } = useUser()
-    const { currentUser } = useAuth()
+    const { currentUser } = useAuth() // Персонализированный интерфейс
     const { isLoading: professionsLoading, professions } = useProfessions()
     const [currentPage, setCurrentPage] = useState(1)
     const [searchQuery, setSearchQuery] = useState('')
     const [selectedProf, setSelectedProf] = useState()
     const [sortBy, setSortBy] = useState({ path: 'name', order: 'asc' })
     const pageSize = 8
-
-    // console.log('professions', professions, 'isLoading', isLoading)
 
     const handleDelete = (userId) => {
         // setUsers(users.filter((user) => user._id !== userId));
@@ -57,24 +55,25 @@ const UsersListPage = () => {
     }
 
     if (users) {
+        // Персонализированный интерфейс
         function filterUsers(data) {
             const filteredUsers = searchQuery
                 ? data.filter(
-                    (user) =>
-                        user.name
-                            .toLowerCase()
-                            .indexOf(searchQuery.toLowerCase()) !== -1
-                )
+                      (user) =>
+                          user.name
+                              .toLowerCase()
+                              .indexOf(searchQuery.toLowerCase()) !== -1
+                  )
                 : selectedProf
-                    ? data.filter(
-                        (user) =>
-                            JSON.stringify(user.profession) ===
-                                JSON.stringify(selectedProf)
-                    )
-                    : data
+                ? data.filter(
+                      (user) =>
+                          JSON.stringify(user.profession) ===
+                          JSON.stringify(selectedProf)
+                  )
+                : data
             return filteredUsers.filter((u) => u._id !== currentUser._id)
         }
-        const filteredUsers = filterUsers(users)
+        const filteredUsers = filterUsers(users) // Персонализированный интерфейс
         const count = filteredUsers.length
         const sortedUsers = _.orderBy(
             filteredUsers,
