@@ -9,11 +9,12 @@ const commentService = {
         )
         return data
     },
+    // Получение комментариев
     getComments: async (pageId) => {
         const { data } = await httpService.get(commentEndpoint, {
             params: {
-                orderBy: '"pageId"',
-                equalTo: `"${pageId}"`
+                orderBy: '"pageId"', // ковычки обязательны
+                equalTo: `"${pageId}"` // ковычки обязательны
             }
         })
         return data
