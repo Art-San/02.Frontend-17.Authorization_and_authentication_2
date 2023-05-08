@@ -20,7 +20,7 @@ export const CommentsProvider = ({ children }) => {
     const [error, setError] = useState(null)
     useEffect(() => {
         setComments(null)
-        setLoading(false)
+        setLoading(false) // Добавляем запрос добавления комментария
     }, [])
     async function createComment(data) {
         const comment = {
@@ -31,17 +31,19 @@ export const CommentsProvider = ({ children }) => {
             userId: currentUser._id
         }
         try {
-            const { content } = await commentService.createComment(comment)
+            const { content } = await commentService.createComment(comment) // Добавляем запрос добавления комментария
             console.log('content', content)
         } catch (error) {
             errorCatcher(error)
         }
         console.log('comment', comment)
     }
+    // Добавляем запрос добавления комментария
     function errorCatcher(error) {
         const { message } = error.response.data
         setError(message)
     }
+    // Добавляем запрос добавления комментария
     useEffect(() => {
         if (error !== null) {
             toast(error)
@@ -50,7 +52,7 @@ export const CommentsProvider = ({ children }) => {
     }, [error])
     return (
         <CommentsContext.Provider
-            value={{ comments, createComment, isLoading }}
+            value={{ comments, createComment, isLoading }} // Добавляем запрос добавления комментария
         >
             {children}
         </CommentsContext.Provider>
