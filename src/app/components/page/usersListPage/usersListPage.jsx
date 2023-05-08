@@ -10,14 +10,12 @@ import { useUser } from '../../../hooks/useUsers'
 import { useProfessions } from '../../../hooks/useProfession'
 const UsersListPage = () => {
     const { users } = useUser()
-    const { isLoading: professionsLoading, professions } = useProfessions()
+    const { isLoading: professionsLoading, professions } = useProfessions() // Изменяем UserList Page
     const [currentPage, setCurrentPage] = useState(1)
     const [searchQuery, setSearchQuery] = useState('')
     const [selectedProf, setSelectedProf] = useState()
     const [sortBy, setSortBy] = useState({ path: 'name', order: 'asc' })
     const pageSize = 8
-
-    // console.log('professions', professions, 'isLoading', isLoading)
 
     const handleDelete = (userId) => {
         // setUsers(users.filter((user) => user._id !== userId));
@@ -57,18 +55,18 @@ const UsersListPage = () => {
     if (users) {
         const filteredUsers = searchQuery
             ? users.filter(
-                (user) =>
-                    user.name
-                        .toLowerCase()
-                        .indexOf(searchQuery.toLowerCase()) !== -1
-            )
+                  (user) =>
+                      user.name
+                          .toLowerCase()
+                          .indexOf(searchQuery.toLowerCase()) !== -1
+              )
             : selectedProf
-                ? users.filter(
-                    (user) =>
-                        JSON.stringify(user.profession) ===
-                            JSON.stringify(selectedProf)
-                )
-                : users
+            ? users.filter(
+                  (user) =>
+                      JSON.stringify(user.profession) ===
+                      JSON.stringify(selectedProf)
+              )
+            : users
 
         const count = filteredUsers.length
         const sortedUsers = _.orderBy(
@@ -83,22 +81,23 @@ const UsersListPage = () => {
 
         return (
             <div className="d-flex">
-                {professions && !professionsLoading && (
-                    <div className="d-flex flex-column flex-shrink-0 p-3">
-                        <GroupList
-                            selectedItem={selectedProf}
-                            items={professions}
-                            onItemSelect={handleProfessionSelect}
-                        />
-                        <button
-                            className="btn btn-secondary mt-2"
-                            onClick={clearFilter}
-                        >
-                            {' '}
-                            Очистить
-                        </button>
-                    </div>
-                )}
+                {professions &&
+                    !professionsLoading && ( // Изменяем UserList Page
+                        <div className="d-flex flex-column flex-shrink-0 p-3">
+                            <GroupList
+                                selectedItem={selectedProf}
+                                items={professions}
+                                onItemSelect={handleProfessionSelect}
+                            />
+                            <button
+                                className="btn btn-secondary mt-2"
+                                onClick={clearFilter}
+                            >
+                                {' '}
+                                Очистить
+                            </button>
+                        </div>
+                    )}
                 <div className="d-flex flex-column">
                     <SearchStatus length={count} />
                     <input
