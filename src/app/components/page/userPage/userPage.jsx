@@ -20,7 +20,8 @@ const UserPage = ({ userId }) => {
                         <MeetingsCard value={user.completedMeetings} />
                     </div>
                     <div className="col-md-8">
-                        <CommentsProvider>
+                        <CommentsProvider // Создаем Comment Hook
+                        >
                             <Comments />
                         </CommentsProvider>
                     </div>
