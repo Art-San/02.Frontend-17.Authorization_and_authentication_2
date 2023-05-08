@@ -3,7 +3,9 @@ import PropTypes from 'prop-types'
 import { toast } from 'react-toastify'
 import axios from 'axios'
 import userService from '../services/user.service'
-import localStorageService, { setTokens } from '../services/localStorage.service'
+import localStorageService, {
+    setTokens
+} from '../services/localStorage.service'
 
 export const httpAuth = axios.create({
     baseURL: 'https://identitytoolkit.googleapis.com/v1/',
@@ -20,7 +22,7 @@ export const useAuth = () => {
 const AuthProvider = ({ children }) => {
     const [currentUser, setUser] = useState()
     const [error, setError] = useState(null)
-    const [isLoading, setLoading] = useState(true)
+    const [isLoading, setLoading] = useState(true) // Добавление Global Loading
 
     async function logIn({ email, password }) {
         try {
@@ -40,12 +42,12 @@ const AuthProvider = ({ children }) => {
             console.log(code, message)
             if (code === 400) {
                 switch (message) {
-                case 'INVALID_PASSWORD':
-                    throw new Error('Email или пароль введены некорректно')
-                default:
-                    throw new Error(
-                        'Слишком много попыток входа. Попробуйте позже'
-                    )
+                    case 'INVALID_PASSWORD':
+                        throw new Error('Email или пароль введены некорректно')
+                    default:
+                        throw new Error(
+                            'Слишком много попыток входа. Попробуйте позже'
+                        )
                 }
             }
         }
@@ -82,7 +84,6 @@ const AuthProvider = ({ children }) => {
                     throw errorObject
                 }
             }
-            // throw new Error
         }
     }
     async function createUser(data) {
@@ -105,6 +106,7 @@ const AuthProvider = ({ children }) => {
         } catch (error) {
             errorCatcher(error)
         } finally {
+            // Добавление Global Loading
             setLoading(false)
         }
     }
@@ -112,6 +114,7 @@ const AuthProvider = ({ children }) => {
         if (localStorageService.getAccessToken()) {
             getUserData()
         } else {
+            // Добавление Global Loading
             setLoading(false)
         }
     }, [])
@@ -123,7 +126,9 @@ const AuthProvider = ({ children }) => {
     }, [error])
     return (
         <AuthContext.Provider value={{ signUp, logIn, currentUser }}>
-            {!isLoading ? children : 'Loading...'}
+            {
+                !isLoading ? children : 'Loading...' // Добавлеем блокирующую загрузку
+            }
         </AuthContext.Provider>
     )
 }
