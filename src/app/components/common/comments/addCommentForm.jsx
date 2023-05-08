@@ -4,7 +4,7 @@ import { validator } from '../../../utils/validator'
 import PropTypes from 'prop-types'
 
 const AddCommentForm = ({ onSubmit }) => {
-    const [data, setData] = useState({})
+    const [data, setData] = useState({}) // добавили пустой объект и заработало
     const [errors, setErrors] = useState({})
     const handleChange = (target) => {
         setData((prevState) => ({
@@ -27,7 +27,7 @@ const AddCommentForm = ({ onSubmit }) => {
     }
 
     const clearForm = () => {
-        setData({})
+        setData({}) // Добавляем метод создания комментария // добавили пустой объект и заработало
         setErrors({})
     }
     const handleSubmit = (e) => {
@@ -43,7 +43,7 @@ const AddCommentForm = ({ onSubmit }) => {
             <h2>New comment</h2>
             <form onSubmit={handleSubmit}>
                 <TextAreaField
-                    value={data.content || ''}
+                    value={data.content || ''} // Добавляем метод создания комментария
                     onChange={handleChange}
                     name="content"
                     label="Сообщение"

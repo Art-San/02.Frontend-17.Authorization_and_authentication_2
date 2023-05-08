@@ -14,7 +14,7 @@ export const useComments = () => {
 
 export const CommentsProvider = ({ children }) => {
     const { userId } = useParams()
-    const { currentUser } = useAuth()
+    const { currentUser } = useAuth() // Добавляем метод создания комментария
     // const [isLoading, setLoading] = useState(true)
     const [comments, setComments] = useState([])
     // const [error, setError] = useState(null)
@@ -22,6 +22,7 @@ export const CommentsProvider = ({ children }) => {
         setComments(null)
     }, [])
     async function createComment(data) {
+        // Добавляем метод создания комментария
         const comment = {
             ...data,
             _id: nanoid(),
@@ -33,7 +34,7 @@ export const CommentsProvider = ({ children }) => {
     }
     return (
         <CommentsContext.Provider
-            value={{ comments, createComment }}
+            value={{ comments, createComment }} // Добавляем метод создания комментария
         >
             {children}
         </CommentsContext.Provider>

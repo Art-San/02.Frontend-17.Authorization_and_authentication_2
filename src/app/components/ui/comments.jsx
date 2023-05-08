@@ -8,14 +8,14 @@ import { useComments } from '../../hooks/useComments'
 const Comments = () => {
     const { userId } = useParams()
     const [comments, setComments] = useState([])
-    const { createComment } = useComments()
+    const { createComment } = useComments() // Добавляем метод создания комментария
     useEffect(() => {
         api.comments
             .fetchCommentsForUser(userId)
             .then((data) => setComments(data))
     }, [])
     const handleSubmit = (data) => {
-        createComment(data)
+        createComment(data) // Добавляем метод создания комментария
         // api.comments
         //     .add({ ...data, pageId: userId })
         //     .then((data) => setComments([...comments, data]))
