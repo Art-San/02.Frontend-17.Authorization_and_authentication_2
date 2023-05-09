@@ -43,8 +43,8 @@ http.interceptors.request.use(
 function transformData(data) {
     return data && !data._id
         ? Object.keys(data).map((key) => ({
-            ...data[key]
-        }))
+              ...data[key]
+          }))
         : data
 }
 http.interceptors.response.use(
@@ -72,6 +72,6 @@ const httpService = {
     post: http.post,
     put: http.put,
     delete: http.delete,
-    patch: http.patch
+    patch: http.patch // метод обновления пользователей
 }
 export default httpService

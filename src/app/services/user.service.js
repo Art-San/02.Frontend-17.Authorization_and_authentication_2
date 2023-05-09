@@ -21,7 +21,7 @@ const userService = {
         )
         return data
     },
-
+    // метод обновления пользователей
     update: async (payload) => {
         const { data } = await httpService.patch(
             userEndpoint + localStorageService.getUserId(),

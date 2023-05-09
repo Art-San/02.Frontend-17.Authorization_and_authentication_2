@@ -44,13 +44,13 @@ const AuthProvider = ({ children }) => {
             console.log(code, message)
             if (code === 400) {
                 switch (message) {
-                case 'INVALID_PASSWORD':
-                    throw new Error('Email или пароль введены некорректно')
+                    case 'INVALID_PASSWORD':
+                        throw new Error('Email или пароль введены некорректно')
 
-                default:
-                    throw new Error(
-                        'Слишком много попыток входа. Попробуйте позже'
-                    )
+                    default:
+                        throw new Error(
+                            'Слишком много попыток входа. Попробуйте позже'
+                        )
                 }
             }
         }
@@ -64,6 +64,7 @@ const AuthProvider = ({ children }) => {
         return Math.floor(Math.random() * (max - min + 1) + min)
     }
 
+    // метод обновления пользователей
     async function updateUserData(data) {
         try {
             const { content } = await userService.update(data)
@@ -144,7 +145,9 @@ const AuthProvider = ({ children }) => {
         }
     }, [error])
     return (
-        <AuthContext.Provider value={{ signUp, logIn, currentUser, logOut, updateUserData }}>
+        <AuthContext.Provider
+            value={{ signUp, logIn, currentUser, logOut, updateUserData }}
+        >
             {!isLoading ? children : 'Loading...'}
         </AuthContext.Provider>
     )
