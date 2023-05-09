@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { displayDate } from '../../../utils/displayDate'
 import { useUser } from '../../../hooks/useUsers'
 import { useAuth } from '../../../hooks/useAuth'
+// для удаления своих коментарие писали правила в Firebase Rules
 const Comment = ({
     content,
     created_at: created,
@@ -11,7 +12,7 @@ const Comment = ({
     onRemove
 }) => {
     const { getUserById } = useUser()
-    const { currentUser } = useAuth()
+    const { currentUser } = useAuth() // отображение кнопки удаления
     const user = getUserById(userId)
 
     return (
@@ -35,7 +36,7 @@ const Comment = ({
                                             - {displayDate(created)}
                                         </span>
                                     </p>
-                                    {currentUser._id === userId && (
+                                    {currentUser._id === userId && ( // отображение кнопки удаления
                                         <button
                                             className="btn btn-sm text-primary d-flex align-items-center"
                                             onClick={() => onRemove(id)}
