@@ -8,13 +8,13 @@ import UserProvider from '../hooks/useUsers'
 const Users = () => {
     const params = useParams()
     const { userId, edit } = params
-    const { currentUser } = useAuth()
+    const { currentUser } = useAuth() // переадресация на персональную страницу
     return (
         <>
             <UserProvider>
                 {userId ? (
                     edit ? (
-                        userId === currentUser._id ? (
+                        userId === currentUser._id ? ( // переадресация на персональную страницу
                             <EditUserPage />
                         ) : (
                             <Redirect to={`/users/${currentUser._id}/edit`} />
@@ -31,20 +31,3 @@ const Users = () => {
 }
 
 export default Users
-
-// return (
-//     <>
-//         <UserProvider>
-//             {userId ? (
-//                 edit ? (
-//                     <EditUserPage />
-//                 ) : (
-//                     <UserPage userId={userId} />
-//                 )
-//             ) : (
-//                 <UsersListPage />
-//             )}
-//         </UserProvider>
-//     </>
-// )
-// }
