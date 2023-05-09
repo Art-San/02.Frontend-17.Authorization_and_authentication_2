@@ -11,22 +11,26 @@ import { useQualities } from '../../../hooks/useQualities'
 import { useProfessions } from '../../../hooks/useProfession'
 
 const EditUserPage = () => {
+    // Это пака не используем, ЗАКАМЕНТИРУЕМ
     // const { userId } = useParams()
     // const history = useHistory()
     const [isLoading, setIsLoading] = useState(true)
     const [data, setData] = useState()
-    const { currentUser } = useAuth()
-    const { qualities, isLoading: qualitiesLoading } = useQualities()
-    const { professions, isLoading: professionLoading } = useProfessions()
+    const { currentUser } = useAuth() // обновляем форму обновления пользователя
+    const { qualities, isLoading: qualitiesLoading } = useQualities() // обновляем форму обновления пользователя
+    const { professions, isLoading: professionLoading } = useProfessions() // обновляем форму обновления пользователя
     const [errors, setErrors] = useState({})
+    // обновляем форму обновления пользователя
     const qualitiesList = qualities.map((q) => ({
         label: q.name,
         value: q._id
     }))
+    // обновляем форму обновления пользователя
     const professionsList = professions.map((p) => ({
         label: p.name,
         value: p._id
     }))
+    // Это пака не используем, ЗАКАМЕНТИРУЕМ
     // const getProfessionById = (id) => {
     //     for (const prof of professions) {
     //         if (prof.value === id) {
@@ -53,6 +57,7 @@ const EditUserPage = () => {
         e.preventDefault()
         const isValid = validate()
         if (!isValid) return
+        // Это пака не используем, ЗАКАМЕНТИРУЕМ
         // const { profession, qualities } = data
         // api.users
         //     .update(userId, {
@@ -63,6 +68,7 @@ const EditUserPage = () => {
         //     .then((data) => history.push(`/users/${data._id}`))
         console.log(data)
     }
+    // обновляем форму обновления пользователя
     function getQualitiesListByIds(qualitiesIds) {
         const qualitiesArray = []
         for (const qualId of qualitiesIds) {
@@ -78,19 +84,23 @@ const EditUserPage = () => {
     const transformData = (data) => {
         console.log('data', data)
         const result = getQualitiesListByIds(data).map((qual) => ({
+            // обновляем форму обновления пользователя
             label: qual.name,
             value: qual._id
         }))
         console.log('result', result)
         return result
     }
+    // обновляем форму обновления пользователя
     useEffect(() => {
         if (!professionLoading && !qualitiesLoading && currentUser && !data) {
             setData({
-                ...currentUser, qualities: transformData(currentUser.qualities)
+                ...currentUser,
+                qualities: transformData(currentUser.qualities)
             })
         }
     }, [professionLoading, qualitiesLoading, currentUser, data])
+    // обновляем форму обновления пользователя
     useEffect(() => {
         if (data && isLoading) {
             setIsLoading(false)
@@ -151,7 +161,7 @@ const EditUserPage = () => {
                             <SelectField
                                 label="Выбери свою профессию"
                                 defaultOption="Choose..."
-                                options={professionsList}
+                                options={professionsList} // обновляем форму обновления пользователя
                                 name="profession"
                                 onChange={handleChange}
                                 value={data.profession}
@@ -170,7 +180,7 @@ const EditUserPage = () => {
                             />
                             <MultiSelectField
                                 defaultValue={data.qualities}
-                                options={qualitiesList}
+                                options={qualitiesList} // обновляем форму обновления пользователя
                                 onChange={handleChange}
                                 name="qualities"
                                 label="Выберите ваши качества"
