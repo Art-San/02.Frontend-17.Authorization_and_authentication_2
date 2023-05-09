@@ -11,10 +11,10 @@ import { useQualities } from '../../../hooks/useQualities'
 import { useProfessions } from '../../../hooks/useProfession'
 
 const EditUserPage = () => {
-    const history = useHistory()
+    const history = useHistory() // отправляем данные пользователя
     const [isLoading, setIsLoading] = useState(true)
     const [data, setData] = useState()
-    const { currentUser, updateUserData } = useAuth()
+    const { currentUser, updateUserData } = useAuth() // отправляем данные пользователя
     const { qualities, isLoading: qualitiesLoading } = useQualities()
     const { professions, isLoading: professionLoading } = useProfessions()
     const [errors, setErrors] = useState({})
@@ -52,7 +52,11 @@ const EditUserPage = () => {
         e.preventDefault()
         const isValid = validate()
         if (!isValid) return
-        await updateUserData({ ...data, qualities: data.qualities.map((q) => q.value) })
+        // отправляем данные пользователя
+        await updateUserData({
+            ...data,
+            qualities: data.qualities.map((q) => q.value)
+        })
         history.push(`/users/${currentUser._id}`)
     }
     function getQualitiesListByIds(qualitiesIds) {
@@ -78,7 +82,8 @@ const EditUserPage = () => {
     useEffect(() => {
         if (!professionLoading && !qualitiesLoading && currentUser && !data) {
             setData({
-                ...currentUser, qualities: transformData(currentUser.qualities)
+                ...currentUser,
+                qualities: transformData(currentUser.qualities)
             })
         }
     }, [professionLoading, qualitiesLoading, currentUser, data])
