@@ -12,7 +12,7 @@ export const useUser = () => {
 
 const UserProvider = ({ children }) => {
     const [users, setUsers] = useState([])
-    const { currentUser } = useAuth()
+    const { currentUser } = useAuth() // исправляем отоброжение качеств после редактирования в профиле
     const [isLoading, setLoading] = useState(true)
     const [error, setError] = useState(null)
     useEffect(() => {
@@ -28,12 +28,12 @@ const UserProvider = ({ children }) => {
             errorCatcher(error)
         }
     }
-
+    // исправляем отоброжение качеств после редактирования в профиле
     useEffect(() => {
         if (!isLoading) {
             const newUsers = [...users]
             const indexUser = newUsers.findIndex(
-                u => u._id === currentUser._id
+                (u) => u._id === currentUser._id
             )
             newUsers[indexUser] = currentUser
             setUsers(newUsers)
