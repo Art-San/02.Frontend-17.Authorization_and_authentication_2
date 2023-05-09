@@ -48,6 +48,15 @@ const RegisterForm = () => {
                 message: 'Email введен некорректно'
             }
         },
+        name: {
+            isRequired: {
+                message: 'Имя обязательно для заполнения'
+            },
+            min: {
+                message: 'Имя должен состоять минимум из 3 символов',
+                value: 3
+            }
+        },
         password: {
             isRequired: {
                 message: 'Пароль обязателен для заполнения'
